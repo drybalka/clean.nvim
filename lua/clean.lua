@@ -38,12 +38,12 @@ M.clean_keymap = function()
   clean_keys('o', 'i', vo_textobjects, '', '<Esc>')
   clean_keys('o', 'a', vo_textobjects, '', '<Esc>')
 
-  local nvo_quote_keys = "'()><[]{}"
-  clean_keys({ 'n', 'v' }, "'", nvo_quote_keys, '', '<Nop>')
-  clean_keys('o', "'", nvo_quote_keys, '', '<Esc>')
-  local nvo_tick_keys = '`()><[]{}'
-  clean_keys({ 'n', 'v' }, '`', nvo_tick_keys, '', '<Nop>')
-  clean_keys('o', '`', nvo_tick_keys, '', '<Esc>')
+  local nvo_marks = "`'()><[]{}"
+  clean_keys({ 'n', 'v' }, "'", nvo_marks, '', '<Nop>')
+  clean_keys('o', "'", nvo_marks, '', '<Esc>')
+  clean_keys({ 'n', 'v' }, '`', nvo_marks, '', '<Nop>')
+  clean_keys('o', '`', nvo_marks, '', '<Esc>')
+
   local nvo_bracket_keys = "<C-d><C-i>#'(*`/DIP[]cdfimpsz{"
   clean_keys({ 'n', 'v' }, '[', nvo_bracket_keys, '', '<Nop>')
   clean_keys({ 'n', 'v' }, ']', nvo_bracket_keys, '', '<Nop>')
