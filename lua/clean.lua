@@ -24,6 +24,7 @@ M.clean_plugins = function()
 	-- vim.g.loaded_netrw = 1
 	-- vim.g.loaded_netrwPlugin = 1
 	-- vim.g.loaded_netrwSettings = 1	
+	-- basically all except filetype, indent, and syntax
 end
 
 M.clean_keymap = function()
@@ -52,13 +53,13 @@ M.clean_keymap = function()
   clean_keys('o', 'i', vo_textobjects, '', '<Esc>')
   clean_keys('o', 'a', vo_textobjects, '', '<Esc>')
 
-  local nvo_marks = '`\'"^.()><[]{}'
+  local nvo_marks = '`\'"^.()><[]{}0123456789'
   clean_keys({ 'n', 'v' }, "'", nvo_marks, '', '<Nop>')
   clean_keys('o', "'", nvo_marks, '', '<Esc>')
   clean_keys({ 'n', 'v' }, '`', nvo_marks, '', '<Nop>')
   clean_keys('o', '`', nvo_marks, '', '<Esc>')
 
-  local nvo_bracket_keys = "<C-d><C-i>#'(*`/DIP[]cdfimpsz{"
+  local nvo_bracket_keys = "<C-d><C-i>#'()*`/DIP[]cdfimpsz{}"
   clean_keys({ 'n', 'v' }, '[', nvo_bracket_keys, '', '<Nop>')
   clean_keys({ 'n', 'v' }, ']', nvo_bracket_keys, '', '<Nop>')
   clean_keys('o', '[', nvo_bracket_keys, '', '<Esc>')
