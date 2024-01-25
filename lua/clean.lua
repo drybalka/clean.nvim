@@ -12,6 +12,20 @@ local function clean_keys(mode, prefix, keys, suffix, rhs)
   end
 end
 
+M.clean_plugins = function()
+	vim.o.loadplugins = false
+	-- vim.g.loaded_gzip = 1
+	-- vim.g.loaded_zip = 1
+	-- vim.g.loaded_zipPlugin = 1
+	-- vim.g.loaded_tar = 1
+	-- vim.g.loaded_tarPlugin = 1
+	-- vim.g.loaded_matchit = 1
+	-- vim.g.loaded_2html_plugin = 1
+	-- vim.g.loaded_netrw = 1
+	-- vim.g.loaded_netrwPlugin = 1
+	-- vim.g.loaded_netrwSettings = 1	
+end
+
 M.clean_keymap = function()
   local i_ctrl_G_keys = '<C-j>j<Down><C-k>k<Up>uU'
   clean_keys('!', '<C-g>', i_ctrl_G_keys, '', '<Nop>')
