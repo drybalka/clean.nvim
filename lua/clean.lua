@@ -52,7 +52,7 @@ M.clean_keymap = function()
   clean_keys('o', 'i', vo_textobjects, '', '<Esc>')
   clean_keys('o', 'a', vo_textobjects, '', '<Esc>')
 
-  local nvo_marks = "`'()><[]{}"
+  local nvo_marks = '`\'"^.()><[]{}'
   clean_keys({ 'n', 'v' }, "'", nvo_marks, '', '<Nop>')
   clean_keys('o', "'", nvo_marks, '', '<Esc>')
   clean_keys({ 'n', 'v' }, '`', nvo_marks, '', '<Nop>')
