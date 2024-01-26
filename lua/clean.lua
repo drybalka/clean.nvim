@@ -80,9 +80,10 @@ M.clean_keymap = function()
   clean_keys({ 'n', 'v' }, '<C-w><C-', n_ctrl_W_keys, '>', '<Nop>')
   clean_keys({ 'n', 'v' }, '<C-w>', n_ctrl_W_keys, '', '<Nop>')
 
-  local nvo_ctrl_keys = '@abcdefghjklmnpqstuwxyz\\]^_'
+  local nvo_ctrl_keys = '@abcdefghjklmnpqstuwxyz\\[]^_'
   clean_keys({ 'n', 'v' }, '<C-', nvo_ctrl_keys, '>', '<Nop>')
   clean_keys('o', '<C-', nvo_ctrl_keys, '>', '<Esc>')
+  vim.keymap.del({ 'n', 'v', 'o' }, '<Esc>')
 
   local o_keys = "opaitfTF'`[]{}()vVgz,;|?HLM+-_*%#"
   clean_keys('o', '', o_keys, '', '<Esc>')
