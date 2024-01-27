@@ -76,7 +76,7 @@ M.clean_keymap = function()
 
   local n_ctrl_W_g_keys = '<C-]>}fFtT<Tab>'
   clean_keys({ 'n', 'v' }, '<C-w>g', n_ctrl_W_g_keys, '', '<Nop>')
-  local n_ctrl_W_keys = 'abcdefghijklmnopqrstuvwxyz+-><=]^_|}'
+  local n_ctrl_W_keys = 'abcdefghijklmnopqrstuvwxyz+-><=]^_|}SWPRHJKLTF'
   clean_keys({ 'n', 'v' }, '<C-w><C-', n_ctrl_W_keys, '>', '<Nop>')
   clean_keys({ 'n', 'v' }, '<C-w>', n_ctrl_W_keys, '', '<Nop>')
 
