@@ -38,18 +38,18 @@ M.clean_plugins = function()
 end
 
 M.clean_keymap = function()
-  local i_ctrl_G_keys = '<C-j>j<Down><C-k>k<Up>uU'
-  clean_keys('!', '<C-g>', i_ctrl_G_keys, '', '<Nop>')
+  local ic_ctrl_G_keys = '<C-j>j<Down><C-k>k<Up>uU'
+  clean_keys('!', '<C-g>', ic_ctrl_G_keys, '', '<Nop>')
 
-  -- local i_ctrl_R_keys = '<C-r><C-o><C-p>'
-  -- clean_keys('!', '<C-r>', i_ctrl_R_keys, '', '<Nop>')
-
-  local i_ctrl_X_ctrl_keys = 'abcdefghijklmnopqrstuvwxyz1234567890[]'
-  clean_keys('!', '<C-x><C-', i_ctrl_X_ctrl_keys, '>', '<Nop>')
+  local ic_ctrl_X_ctrl_keys = 'abcdefghijklmnopqrstuvwxyz1234567890[]'
+  clean_keys('!', '<C-x><C-', ic_ctrl_X_ctrl_keys, '>', '<Nop>')
   clean_keys('!', '<C-x>', 's', '', '<Nop>')
 
-  local i_ctrl_keys = '@abcdefghijklmnopqrstuvwxyz[\\]^_'
-  clean_keys('!', '<C-', i_ctrl_keys, '>', '<Nop>')
+  local c_ctrl_R_ctrl_keys = 'fpwalro'
+  clean_keys('c', '<C-r><C-', c_ctrl_R_ctrl_keys, '>', '<Nop>')
+
+  local ic_ctrl_keys = '@abcdefghijklmnopqrstuvwxyz[\\]^_'
+  clean_keys('!', '<C-', ic_ctrl_keys, '>', '<Nop>')
   vim.keymap.del('!', '<Esc>')
   vim.keymap.del('!', '<Cr>')
   vim.keymap.del('!', '<Tab>')
