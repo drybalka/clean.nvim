@@ -2,12 +2,10 @@ local M = {}
 
 local function clean_keys(mode, prefix, keys, suffix, rhs)
   for key in keys:gmatch '<[^<>]->' do
-    -- print(prefix .. key .. suffix)
     vim.keymap.set(mode, prefix .. key .. suffix, rhs, { nowait = true })
   end
   local single_keys = keys:gsub('<[^<>]->', '')
   for key in single_keys:gmatch '.' do
-    -- print(prefix .. key .. suffix)
     vim.keymap.set(mode, prefix .. key .. suffix, rhs, { nowait = true })
   end
 end
@@ -34,7 +32,6 @@ M.clean_plugins = function()
   vim.g.loaded_ruby_provider = 0
   vim.g.loaded_perl_provider = 0
   vim.g.loaded_node_provider = 0
-  -- basically all except filetype, indent, and syntax, as they are loaded before init.lua
 end
 
 M.clean_keymap = function()
@@ -103,11 +100,6 @@ M.clean_keymap = function()
 
   local nv_keys = ' !"#%&\'()*+,-.0;><=?@FHJKLMQSTUZ[]_`fmqstz{}|~'
   clean_keys({ 'n', 'v' }, '', nv_keys, '', '<Nop>')
-
-  -- Potentially useful: <c-r>, <c-w>, <c-l>, <c-o/i/t>, <c-e/y>, <c-d/u>, <c-b/f>, <c-a/x>
 end
--- Basic functionality
--- i: only basic input keys
--- n, v: <C-v>, <C-o/i>, $, ^, /, n, N, :, u, <C-r>, A, B, C, D, E, G, I, O, P, R, V, W, X, Y, a, b, c/cc, d/dd, e, g/gg, i, o, hjkl, p, r, v, w, x, y/yy
 
 return M

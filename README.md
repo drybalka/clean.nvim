@@ -9,7 +9,7 @@ It provides only 2 functions:
     - char movements `hjkl`, as well as word movements `webWEB`
     - line movements `^$`, as well as top `gg` and bottom `G` movements
     - visual mode enter `vV<C-v>`, as well as Ex command mode `:`
-    - insert mode enter `aioAIO`
+    - insert mode enter `aioAIO` and exit `<Esc>`
     - buffer search `/` with next/previous jumps `nN`
     - yank `yY` (together with line yank `yy`) and paste `pP`
     - char deletions `xX`, text deletions `dD` (together with line delete `dd`)
