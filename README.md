@@ -1,6 +1,6 @@
 # clean.nvim
 
-Plugin for cleaning up the default key mappings and plugins in Neovim leaving only the bare essentials.
+Plugin for cleaning up the default key mappings and plugins in Neovim leaving only the bare essentials to build upon.
 
 It provides only 2 functions: 
 - `clean_plugins()`: disables most nonessential builtin Neovim providers and plugins, such as, netrw, zipPlugin, matchit, etc. (see the full list in the code)
