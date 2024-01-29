@@ -1,44 +1,56 @@
-# tree-climber.nvim
+# clean.nvim
 
-Plugin for easy navigation around the syntax-tree produced by the treesitter that also works in comments and multi-language files!
+Plugin for cleaning up the default key mappings and plugins in Neovim leaving only the bare essentials.
 
-It provides 4 basic motions: jump to next/previous sibling in the tree, jump to parent, and jump to child, as well as the ability to swap neighbouring nodes.
-It also provides a node selection method that works similar to other text-object selections, hence the proposed mapping 'in' = "inner node".
-
-For convenience 'tree-climber.nvim' squashes parents with a single child together and tries to preserve your tree depth between jumps so that you can always return from where you started.
+It provides only 2 functions: 
+- `clean_plugins()`: disables most nonessential builtin Neovim providers and plugins, such as, netrw, zipPlugin, matchit, etc. (see the full list in the code)
+- `clean_keymap()`: maps most of Neovim builtin keymaps to `<Nop>` leaving (subjectively) only essential functionality:
+    - any text typed in insert/cmdline modes
+    - char movements `hjkl`, as well as word movements `webWEB`
+    - line movements `^$`, as well as top `gg` and bottom `G` movements
+    - visual mode enter `vV<C-v>`, as well as Ex command mode `:`
+    - insert mode enter `aioAIO`
+    - buffer search `/` with next/previous jumps `nN`
+    - yank `yY` (together with line yank `yy`) and paste `pP`
+    - char deletions `xX`, text deletions `dD` (together with line delete `dd`)
+    - text changes `cC` (together with line change `cc`), as well as char replace `r` and text replace `R`
+    - undo `u` and redo `<C-r>`, as well as next/previous jumplist movements `<C-o><C-i>`
 
 ### Motivation
 
-It is actually quite surprising that this functionality is not provided by the treesitter itself.
-The memorable alternatives are:
- * [nvim-treesitter-textobjects](https://github.com/nvim-treesitter/nvim-treesitter-textobjects) allows jumping in some filetypes to predefined node types, but each type requires its own keymap, whereas 'tree-climber.nvim' allows jumping over abstract treesitter trees.
- * [syntax-tree-surfer](https://github.com/ziontee113/syntax-tree-surfer) has a very similar functionality, but unfortunately does not support jumping over comments and across multi-language files.
+Neovim is a powerful text editor with a lot of functionality - the index consists of several hundred of commands.
+This plugin narrows it down to a few dozen most used commands, which may be beneficial for the following reasons:
+- avoids unpredictable results after accidental clicks, like `q:` instead of `:q`
+- avoids accidental clashes for keymaps defined only in certain filetypes/buffers
+- allows you to have a dedicated keymap file in dotfiles containing the self-picked functionality, which provides a better overview
+- makes you think about how you use the editor, choose keymaps that are natural for you
+- some builtin functionality is simply too specific and should probably be extracted into a plugin in the future (Rot13 encoding? Hebrew language support?)
+- disables builtin plugins that you don't use and saves on startup time and completion clutter
+- some people simply prefer a bottom-up approach
+
 
 ### Installation
 
-Load 'tree-climber.nvim' as any other neovim plugin using your favourite package manager.
+Load 'clean.nvim' as any other Neovim plugin using your favourite package manager.
 
-The plugin provides 8 functions, that can be mapped by the user: `goto_next()`, `goto_prev()`, `goto_parent()`, `goto_child()`, `swap_next()`, `swap_prev()`,`select_node()` and `highlight_node()`.
-Suggested mapping for easy copy-pasting:
+The plugin provides only 2 functions, which can called together towards the start of your init file (in order not to overwrite any previous keymaps or global options):
 ```
-local keyopts = { noremap = true, silent = true }
-vim.keymap.set({'n', 'v', 'o'}, 'H', require('tree-climber').goto_parent, keyopts)
-vim.keymap.set({'n', 'v', 'o'}, 'L', require('tree-climber').goto_child, keyopts)
-vim.keymap.set({'n', 'v', 'o'}, 'J', require('tree-climber').goto_next, keyopts)
-vim.keymap.set({'n', 'v', 'o'}, 'K', require('tree-climber').goto_prev, keyopts)
-vim.keymap.set({'v', 'o'}, 'in', require('tree-climber').select_node, keyopts)
-vim.keymap.set('n', '<c-k>', require('tree-climber').swap_prev, keyopts)
-vim.keymap.set('n', '<c-j>', require('tree-climber').swap_next, keyopts)
-vim.keymap.set('n', '<c-h>', require('tree-climber').highlight_node, keyopts)
+require('clean').clean_keymap()
+require('clean').clean_plugins()
 ```
 
-### Configuration
+In order to re-enable a command either delete the keymap or map it to something else (including itself) explicitly:
+```
+vim.keymap.del('', 'f')
+vim.keymap.set('', 't', 't')
+```
+Note, that re-enabling multi-key commands may require re-enabling their prefixes as well, i.e., to use `zz` you should have:
+```
+vim.keymap.del('n', 'z')
+vim.keymap.del('n', 'zz')
+```
 
-Each function optionally accepts a table with a configuration, for example, `goto_next({ skip_comments = true})`.
-
-The available options so far are:
-* `skip_comments` (boolean) - ignore comment nodes as if they were not there at all (default: false)
-* `highlight` (boolean) - When moving using the `goto_*()` functions, briefly highlight the new node (default: false)
-* `timeout` (number) - When highlighting, the time in ms before highlight is cleared (default: 150)
-* `on_macro` (boolean) - when `highlight` is true, highlight nodes even when executing a macro (default: false)
-* `higroup` (string) - the highlight group to use for highlighting (default: `'IncSearch'`)
+In order to re-enable a plugin simply reset the corresponding variable to `nil` afterwards, for example,
+```
+vim.g.editorconfig = nil
+```
